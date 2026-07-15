@@ -1,0 +1,48 @@
+# Duvidas
+--save-dev com typescript
+tsconfig.json
+modelagem conceitual, lógica e fisíca
+
+# Conceitos
+
+# Planejamentos
+
+## Plano Atual (Primeiro MVP)
+== Super básico ==
+- Registrar usuário
+    - Tabela de usuários
+        - Email e senha
+    - Receber email e senha
+    - Gravar email e senha
+- Logar com usuário (autenticar usuário)
+    - Receber email e senha
+    - Encontrar match email e senha
+    - Devolver usuário (Logado / Não Logado)
+
+## Planejamentos de Release
+### 0.1.0
+- Adicionar banco de dados
+Quero adicionar um banco de dados para eventualmente guardar minhas informações.
+Banco sqlite.
+
+- Adicionar tabela "users"
+Preciso da tabele "users" para eventualmente usar nos endpoints.
+Modelo conceitual.
+Modelo lógico.
+Modelo fisico.
+
+Conceito inicial da tabela:
+
+> A tabela de usuários (users) terá 3 campos: id, email e password.
+> id será o identificador primário da tabela.
+> email será um identificador único. Não podemos ter mais de 1 email igual.
+> password não pode ser nulo.
+> 
+> Todo usuário deve ter um email e senha.
+> Não vamos ter casos de usuário sem senha temporariamente, todos devem possuir.
+
+### 0.2.0
+- Endpoint de registrar usuário
+
+### 0.3.0
+- Endpoint de logar usuário

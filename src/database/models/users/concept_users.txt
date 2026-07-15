@@ -1,0 +1,32 @@
+# Concept
+
+Table: users
+Fields: id, email, password
+
+A tabela de usuários (users) terá 3 campos: id, email e password.
+id será o identificador primário da tabela.
+email será um identificador único. Não podemos ter mais de 1 email igual.
+password não pode ser nulo.
+
+Todo usuário deve ter um email e senha.
+Não vamos ter casos de usuário sem senha temporariamente, todos devem possuir.
+
+# Logical
+
+Table: users
+Fields: id, email, password
+
+id:
+- Primary key
+- Integer
+- Auto-increment
+- Not-null
+
+email:
+- Unique key
+- Varchar(100)
+- Not-null
+
+password:
+- Varchar(100)
+- Not-null
