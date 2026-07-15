@@ -30,3 +30,7 @@
 - Refatoração dos arquivos de rota e database para uma abordagem OO
 - Criada a interface "Database"
 - Criada a classe "SQLiteDatabase"
+
+# 0.7.0
+- Separação de arquivos (controllers)
+- Refatoração para criar "Containers de Serviço"

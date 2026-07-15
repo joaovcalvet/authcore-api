@@ -23,12 +23,3 @@ export class SQLiteDatabase implements Database
         return new DatabaseSync(this.DATABASE_PATH);
     }
 }
-
-// Criar tabale "users"
-// database.exec(`
-//     CREATE TABLE users (
-//         id INTEGER PRIMARY KEY AUTOINCREMENT,
-//         email TEXT UNIQUE NOT NULL,
-//         password TEXT NOT NULL
-//     );
-// `);

@@ -1,15 +1,15 @@
-import type { DatabaseSync } from 'node:sqlite';
-import express, { Router, type Request, type Response } from 'express';
+import express, { Router, type Response } from 'express';
 
 import AuthRouter from './auth.routes.ts';
+import type BaseController from '../controllers/BaseController.ts';
 
 class AppRouter
 {
-    private db: DatabaseSync;
+    private baseController: BaseController;
 
-    constructor(database: DatabaseSync)
+    constructor(controller: BaseController)
     {
-        this.db = database;
+        this.baseController = controller;
     }
 
     initialize(): Router
@@ -17,12 +17,12 @@ class AppRouter
         const router = express.Router();
 
         // Rota de Teste
-        router.get('/', (req: Request, res: Response) => {
+        router.get('/', (res: Response) => {
             res.send("Hello, world!");
         });
 
         // Rotas de Auth
-        router.use(new AuthRouter(this.db).initialize());
+        router.use(new AuthRouter(this.baseController.authController).initialize());
 
         return router;
     }
