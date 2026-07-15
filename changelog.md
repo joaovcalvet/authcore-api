@@ -5,3 +5,9 @@
 # 0.1.0
 - Adicionado o banco em sqlite
 - Criada a tabela "users"
+
+# 0.2.0
+- Adicionada a rota "auth/register"
+- Criada as validações iniciais para registro
+- Criada conexão com o banco
+- Inserção bem-sucedida

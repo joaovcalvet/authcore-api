@@ -1,9 +1,28 @@
 # Duvidas
 --save-dev com typescript
 tsconfig.json
-modelagem conceitual, lógica e fisíca
+modelagem conceitual, lógica e fisíca banco
+app.use(express.json());
 
 # Conceitos
+- Ciclo de vida de sessão com JWT
+- Hashing de senha
+- Refresh token rotation
+- Rate limiting
+- Middleware de autenticação
+- Tratamento de erro sem vazar informação
+
+# Melhorias
+- Melhorar validação de erros
+- Melhorar validação de casos
+- Melhorar respostas ao cliente
+- Implementar Prisma
+- Implementar migrations
+- Implementar testes
+- Implementar controllers
+- Implementar router
+- Criar arquitetura para reutilizar o database
+- Criar models e interfaces para os objetos (type assertion)
 
 # Planejamentos
 
@@ -43,6 +62,10 @@ Conceito inicial da tabela:
 
 ### 0.2.0
 - Endpoint de registrar usuário
+Preciso de um endpoint que receba os campos: email, senha, confirmar senha
+Bato senha com senha
+Verifico se email já existe no banco
+Retorno e aplico resultado
 
 ### 0.3.0
 - Endpoint de logar usuário

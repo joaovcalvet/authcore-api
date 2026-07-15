@@ -1,6 +1,6 @@
 {
   "name": "authcore-api",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Projeto voltado para estudos das tecnologias Typescript, Express e JWT",
   "keywords": [
     "express"
