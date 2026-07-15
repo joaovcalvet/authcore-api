@@ -11,3 +11,7 @@
 - Criada as validações iniciais para registro
 - Criada conexão com o banco
 - Inserção bem-sucedida
+
+# 0.3.0
+- Adicionada a rota "auth/login"
+- Criada as validações iniciais para login

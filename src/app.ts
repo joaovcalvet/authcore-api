@@ -43,6 +43,19 @@ app.post('/auth/register', (req: Request, res: Response) => {
     return res.send("Usuário cadastrado com sucesso!");
 });
 
+app.post('/auth/login', (req: Request, res: Response) => {
+
+    const result = database.prepare("SELECT * FROM users WHERE email = ?").get(req.body.email);
+
+    if(result === undefined)
+        return res.status(400).send("Email ou senha incorretos!");
+
+    if(result.password != req.body.password)
+        return res.status(400).send("Email ou senha incorretos!");
+
+    return res.send("Usuário logado com sucesso!");
+});
+
 app.listen(port, () => {
     console.log(`Aplicação rodando na porta: ${port}`)
 });

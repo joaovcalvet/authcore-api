@@ -3,6 +3,7 @@
 tsconfig.json
 modelagem conceitual, lógica e fisíca banco
 app.use(express.json());
+Caso da string vindo quebrada do cliente
 
 # Conceitos
 - Ciclo de vida de sessão com JWT
@@ -69,3 +70,7 @@ Retorno e aplico resultado
 
 ### 0.3.0
 - Endpoint de logar usuário
+Preciso de um endpoint que recebe os campos: email e password
+verifico se existe o email
+verifico se a senha bate
+retorno resposta
