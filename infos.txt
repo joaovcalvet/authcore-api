@@ -45,6 +45,7 @@ dotenv/config (rodei o comando direto?)
 - Estrutura da aplicação
     - Separação (controller, services, repository)
     - Routes
+    - Database
 - dotenv
 - Asserção de Tipos
     - Interfaces

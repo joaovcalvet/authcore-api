@@ -20,3 +20,7 @@
 - Adicionada a dependência "dotenv"
 - Adicionado o arquivo .env
 - Variáveis de ambiente adicionadas
+
+# 0.5.0
+- Adicionado o arquivo "routes"
+- Rotas movidas para o novo arquivo, limpando o código do entrypoint
