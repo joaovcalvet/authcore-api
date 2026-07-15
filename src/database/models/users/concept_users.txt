@@ -18,15 +18,15 @@ Fields: id, email, password
 
 id:
 - Primary key
-- Integer
+- INTEGER
 - Auto-increment
 - Not-null
 
 email:
 - Unique key
-- Varchar(100)
+- TEXT
 - Not-null
 
 password:
-- Varchar(100)
+- TEXT
 - Not-null
