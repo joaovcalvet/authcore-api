@@ -6,14 +6,20 @@ modelagem conceitual, lógica e fisíca banco
 app.use(express.json());
 Caso da string vindo quebrada do cliente
 dotenv/config (rodei o comando direto?)
+pool de conexões
 
-# Conceitos
+# Conceitos (core do que é pedido no projeto) 
 - Ciclo de vida de sessão com JWT
 - Hashing de senha
 - Refresh token rotation
 - Rate limiting
 - Middleware de autenticação
 - Tratamento de erro sem vazar informação
+
+# Conceitos (estudo)
+- Roteadores em Camadas
+- Inicialização controlada de banco de dados (ou componentes no geral)
+    - primeiro conecta, depois importa (depende do caso)
 
 # Melhorias
 - Melhorar validação de erros

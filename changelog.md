@@ -24,3 +24,9 @@
 # 0.5.0
 - Adicionado o arquivo "routes"
 - Rotas movidas para o novo arquivo, limpando o código do entrypoint
+
+# 0.6.0
+- Separação dos arquivos de rotas: index e auth
+- Refatoração dos arquivos de rota e database para uma abordagem OO
+- Criada a interface "Database"
+- Criada a classe "SQLiteDatabase"

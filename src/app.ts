@@ -1,9 +1,15 @@
 import 'dotenv/config';
-import router from './routes.ts';
-import express, { type Express } from 'express';
+import AppRouter from './routes/index.routes.ts';
+import express, { type Router, type Express } from 'express';
+
+import type Database from './interfaces/Database.ts';
+import { SQLiteDatabase } from './database/database.ts';
 
 const port: string = process.env.APP_PORT || "3000";
+
 const app: Express = express();
+const db: Database = new SQLiteDatabase();
+const router: Router = new AppRouter(db.connectDatabase()).initialize();
 
 app.use(router);
 
