@@ -34,3 +34,8 @@
 # 0.7.0
 - Separação de arquivos (controllers)
 - Refatoração para criar "Containers de Serviço"
+
+# 0.8.0
+- Prisma ORM implementado
+- Alteração das queries para utilizar prisma
+- Alterado alguns tipos para casar com o prisma

@@ -1,22 +1,23 @@
 import { type Request, type Response } from 'express';
-import type { DatabaseSync } from 'node:sqlite';
+import type { LoginRequestBody, RegisterRequestBody } from '../interfaces/AuthRequest.ts';
+import type { PrismaClient } from '../database/generated/prisma/client.ts';
 
 interface AuthControllerInterface
 {
-    register(req: Request, res: Response): Response;
-    login(req: Request, res: Response): Response;
+    register(req: Request<{}, {}, RegisterRequestBody>, res: Response): Promise<Response<any, Record<string, any>>>;
+    login(req: Request<{}, {}, LoginRequestBody>, res: Response): Promise<Response<any, Record<string, any>>>;
 }
 
 class AuthController implements AuthControllerInterface
 {
-    private db: DatabaseSync
+    private db: PrismaClient
 
-    constructor(database: DatabaseSync)
+    constructor(database: PrismaClient)
     {
         this.db = database;
     }
 
-    public register(req: Request, res: Response): Response
+    public async register(req: Request<{}, {}, RegisterRequestBody>, res: Response): Promise<Response<any, Record<string, any>>>
     {
         // Validações
         if(req.body.email === undefined || req.body.email === "")
@@ -31,14 +32,13 @@ class AuthController implements AuthControllerInterface
         if(req.body.password != req.body.confirmPassword)
             return res.status(400).send("As senhas não batem!");
 
-        const result = this.db.prepare("SELECT * FROM users WHERE email = ?").all(req.body.email);
+        const user = await this.db.user.findFirst({ where: { email: req.body.email } });
 
-        if(result.length !== 0)
+        if(user != null)
             return res.status(400).send("Esse email já está em uso!");
 
         try {
-            const insert = this.db.prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-            insert.run(req.body.email, req.body.password);
+            await this.db.user.create({ data: { email: req.body.email, password: req.body.password } });
         } catch(error) {
             console.log(error);
             return res.status(400).send("Houve um erro ao cadastrar seu usuário. Tente novamente mais tarde.");
@@ -47,14 +47,19 @@ class AuthController implements AuthControllerInterface
         return res.send("Usuário cadastrado com sucesso!");
     }
 
-    public login(req: Request, res: Response): Response
+    public async login(req: Request<{}, {}, LoginRequestBody>, res: Response): Promise<Response<any, Record<string, any>>>
     {
-        const result = this.db.prepare("SELECT * FROM users WHERE email = ?").get(req.body.email);
+        const { email, password } = req.body;
 
-        if(result === undefined)
+        if(!email || !password)
+            return res.status(400).send("Email e senha são obrigatórios!");
+
+        const user = await this.db.user.findFirst({ where: { email: email } });
+
+        if(user === null)
             return res.status(400).send("Email ou senha incorretos!");
 
-        if(result.password != req.body.password)
+        if(user.password != password)
             return res.status(400).send("Email ou senha incorretos!");
 
         return res.send("Usuário logado com sucesso!");

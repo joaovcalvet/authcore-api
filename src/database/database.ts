@@ -1,5 +1,6 @@
-import { DatabaseSync } from 'node:sqlite';
 import type Database from '../interfaces/Database.ts';
+import { PrismaClient } from "./generated/prisma/client.ts";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
 /* 
     Classe que "cria" o banco de dados
@@ -11,15 +12,17 @@ import type Database from '../interfaces/Database.ts';
 
 export class SQLiteDatabase implements Database
 {
-    private DATABASE_PATH: string;
+    private connectionString: string;
+    private adapter: PrismaBetterSqlite3;
 
     constructor()
     {
-        this.DATABASE_PATH = process.env.DATABASE_PATH || "database.sqlite";
+        this.connectionString = process.env.DATABASE_URL || "file:./dev.db";
+        this.adapter = new PrismaBetterSqlite3({ url: this.connectionString });
     }
 
-    connectDatabase(): DatabaseSync
+    connectDatabase(): PrismaClient
     {
-        return new DatabaseSync(this.DATABASE_PATH);
+        return new PrismaClient({ adapter: this.adapter });
     }
 }

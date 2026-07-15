@@ -1,6 +1,6 @@
-import type { DatabaseSync } from "node:sqlite";
+import { type PrismaClient } from '../database/generated/prisma/client.ts'
 
 export default interface Database
 {
-    connectDatabase(): DatabaseSync
+    connectDatabase(): PrismaClient
 }

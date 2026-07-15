@@ -7,6 +7,8 @@ app.use(express.json());
 Caso da string vindo quebrada do cliente
 dotenv/config (rodei o comando direto?)
 pool de conexões
+@ ao instalar pacotes
+npm vs npx
 
 # Conceitos (core do que é pedido no projeto) 
 - Ciclo de vida de sessão com JWT
