@@ -15,3 +15,8 @@
 # 0.3.0
 - Adicionada a rota "auth/login"
 - Criada as validações iniciais para login
+
+# 0.4.0
+- Adicionada a dependência "dotenv"
+- Adicionado o arquivo .env
+- Variáveis de ambiente adicionadas

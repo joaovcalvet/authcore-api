@@ -1,9 +1,11 @@
 # Duvidas
 --save-dev com typescript
+types/node e types/express
 tsconfig.json
 modelagem conceitual, lógica e fisíca banco
 app.use(express.json());
 Caso da string vindo quebrada do cliente
+dotenv/config (rodei o comando direto?)
 
 # Conceitos
 - Ciclo de vida de sessão com JWT
@@ -38,6 +40,16 @@ Caso da string vindo quebrada do cliente
     - Receber email e senha
     - Encontrar match email e senha
     - Devolver usuário (Logado / Não Logado)
+
+## Progresso pós MVP (Limpeza da estrutura)
+- Estrutura da aplicação
+    - Separação (controller, services, repository)
+    - Routes
+- dotenv
+- Asserção de Tipos
+    - Interfaces
+    - Ligar o lint
+- Implementar o Prisma
 
 ## Planejamentos de Release
 ### 0.1.0

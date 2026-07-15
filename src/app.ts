@@ -1,9 +1,12 @@
+import 'dotenv/config';
 import { DatabaseSync } from 'node:sqlite';
 import express, { type Express, type Request, type Response } from 'express';
 
-const port: Number = 3000;
+const port: string = process.env.APP_PORT || "3000";
+const database_path: string = process.env.DATABASE_PATH || "database.sqlite";
+
 const app: Express = express();
-const database: DatabaseSync = new DatabaseSync("database.sqlite");
+const database: DatabaseSync = new DatabaseSync(database_path);
 
 app.use(express.json());
 
