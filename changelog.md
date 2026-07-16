@@ -39,3 +39,8 @@
 - Prisma ORM implementado
 - Alteração das queries para utilizar prisma
 - Alterado alguns tipos para casar com o prisma
+
+# 0.9.0
+- Adicionado o pacote bcrypt
+- Alterado o tratamento de dados de registro e login
+- Corrigido problemas com o prisma
