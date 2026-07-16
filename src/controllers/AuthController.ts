@@ -1,4 +1,5 @@
 import { type Request, type Response } from 'express';
+import bcrypt from 'bcrypt';
 import type { LoginRequestBody, RegisterRequestBody } from '../interfaces/AuthRequest.ts';
 import type { PrismaClient } from '../database/generated/prisma/client.ts';
 
@@ -38,7 +39,8 @@ class AuthController implements AuthControllerInterface
             return res.status(400).send("Esse email já está em uso!");
 
         try {
-            await this.db.user.create({ data: { email: req.body.email, password: req.body.password } });
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            await this.db.user.create({ data: { email: req.body.email, password: hashedPassword } });
         } catch(error) {
             console.log(error);
             return res.status(400).send("Houve um erro ao cadastrar seu usuário. Tente novamente mais tarde.");
@@ -59,7 +61,7 @@ class AuthController implements AuthControllerInterface
         if(user === null)
             return res.status(400).send("Email ou senha incorretos!");
 
-        if(user.password != password)
+        if(!await bcrypt.compare(password, user.password))
             return res.status(400).send("Email ou senha incorretos!");
 
         return res.send("Usuário logado com sucesso!");

@@ -9,6 +9,9 @@ dotenv/config (rodei o comando direto?)
 pool de conexões
 @ ao instalar pacotes
 npm vs npx
+owasp e salt
+hashing vs encryption
+service vs controller
 
 # Conceitos (core do que é pedido no projeto) 
 - Ciclo de vida de sessão com JWT
@@ -17,11 +20,13 @@ npm vs npx
 - Rate limiting
 - Middleware de autenticação
 - Tratamento de erro sem vazar informação
+    - Erros genéricos para não expor informações sensíveis
 
 # Conceitos (estudo)
 - Roteadores em Camadas
 - Inicialização controlada de banco de dados (ou componentes no geral)
     - primeiro conecta, depois importa (depende do caso)
+- Arquitetura em Camadas
 
 # Melhorias
 - Melhorar validação de erros
@@ -59,6 +64,12 @@ npm vs npx
     - Interfaces
     - Ligar o lint
 - Implementar o Prisma
+
+## Melhorias de segurança (Inicio do requisito)
+- Estrutura para as validações (estudar)
+- Aplicando hashing
+- Implementar o zod nas requests
+- Diferença entre controller e service (estudar)
 
 ## Planejamentos de Release
 ### 0.1.0

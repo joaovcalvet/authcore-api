@@ -12,8 +12,10 @@ datasource db {
   provider = "sqlite"
 }
 
-model users {
+model User {
   id Int @id @default(autoincrement())
   email String @unique
   password String
+
+  @@map("users")
 }
