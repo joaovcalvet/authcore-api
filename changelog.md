@@ -44,3 +44,6 @@
 - Adicionado o pacote bcrypt
 - Alterado o tratamento de dados de registro e login
 - Corrigido problemas com o prisma
+
+# 0.10.0
+- Criada a estrutura de services e repositories

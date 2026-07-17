@@ -1,11 +1,14 @@
-import type { DatabaseSync } from "node:sqlite";
-import AuthRepository from "./AuthRepository.ts";
+import type { PrismaClient } from "../generated/prisma/client.ts";
+
+import UserRepository from "./UserRepository.ts";
 
 class BaseRepository
 {
-    protected db: DatabaseSync;
+    protected db: PrismaClient;
 
-    constructor(database: DatabaseSync)
+    public userRepository!: UserRepository;
+
+    constructor(database: PrismaClient)
     {
         this.db = database;
         this.initialize();
@@ -13,7 +16,7 @@ class BaseRepository
 
     initialize(): void
     {
-        AuthRepository;
+        this.userRepository = new UserRepository(this.db);
     }
 }
 

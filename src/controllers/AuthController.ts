@@ -1,7 +1,9 @@
 import { type Request, type Response } from 'express';
-import bcrypt from 'bcrypt';
+
+import type UserService from '../services/UserService.ts';
+import type AuthService from '../services/AuthService.ts';
+
 import type { LoginRequestBody, RegisterRequestBody } from '../interfaces/AuthRequest.ts';
-import type { PrismaClient } from '../database/generated/prisma/client.ts';
 
 interface AuthControllerInterface
 {
@@ -11,11 +13,13 @@ interface AuthControllerInterface
 
 class AuthController implements AuthControllerInterface
 {
-    private db: PrismaClient
+    private authSvc: AuthService;
+    private userSvc: UserService; 
 
-    constructor(database: PrismaClient)
+    constructor(userService: UserService, authService: AuthService)
     {
-        this.db = database;
+        this.authSvc = authService;
+        this.userSvc = userService;
     }
 
     public async register(req: Request<{}, {}, RegisterRequestBody>, res: Response): Promise<Response<any, Record<string, any>>>
@@ -33,18 +37,11 @@ class AuthController implements AuthControllerInterface
         if(req.body.password != req.body.confirmPassword)
             return res.status(400).send("As senhas não batem!");
 
-        const user = await this.db.user.findFirst({ where: { email: req.body.email } });
-
-        if(user != null)
+        if(await this.userSvc.findUserByEmail(req.body.email) !== null)
             return res.status(400).send("Esse email já está em uso!");
 
-        try {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
-            await this.db.user.create({ data: { email: req.body.email, password: hashedPassword } });
-        } catch(error) {
-            console.log(error);
+        if(!await this.userSvc.createUser(req.body.email, req.body.password))
             return res.status(400).send("Houve um erro ao cadastrar seu usuário. Tente novamente mais tarde.");
-        }
 
         return res.send("Usuário cadastrado com sucesso!");
     }
@@ -56,12 +53,7 @@ class AuthController implements AuthControllerInterface
         if(!email || !password)
             return res.status(400).send("Email e senha são obrigatórios!");
 
-        const user = await this.db.user.findFirst({ where: { email: email } });
-
-        if(user === null)
-            return res.status(400).send("Email ou senha incorretos!");
-
-        if(!await bcrypt.compare(password, user.password))
+        if(!await this.authSvc.login(email, password))
             return res.status(400).send("Email ou senha incorretos!");
 
         return res.send("Usuário logado com sucesso!");

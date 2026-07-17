@@ -1,21 +1,23 @@
-import AuthController from "./AuthController.ts";
 import type { PrismaClient } from "../database/generated/prisma/client.ts";
+
+import AuthController from "./AuthController.ts";
+import type BaseService from "../services/BaseService.ts";
 
 class BaseController
 {
-    private db: PrismaClient;
+    private baseService: BaseService;
 
     public authController!: AuthController;
 
-    constructor(database: PrismaClient) 
+    constructor(service: BaseService) 
     {
-        this.db = database;
+        this.baseService = service;
         this.initialize();
     }
 
     private initialize(): void
     {
-        this.authController = new AuthController(this.db);
+        this.authController = new AuthController(this.baseService.userService, this.baseService.authService);
     }
 }
 

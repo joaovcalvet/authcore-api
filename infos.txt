@@ -12,6 +12,10 @@ npm vs npx
 owasp e salt
 hashing vs encryption
 service vs controller
+js promises
+Interface Segregation Principle 
+Composition root
+dependency injection (DI)
 
 # Conceitos (core do que é pedido no projeto) 
 - Ciclo de vida de sessão com JWT
