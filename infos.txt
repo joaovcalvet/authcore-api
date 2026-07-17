@@ -16,6 +16,28 @@ js promises
 Interface Segregation Principle 
 Composition root
 dependency injection (DI)
+error handling e conceito de negócio
+
+Responsabilidades do Controller:
+- Interagir com a camada HTTP
+- Delegar para a camada de negócio (service)
+- Responder com o status code e informações corretas
+
+Responsabilidades do Service
+- Processar lógica de negócio (ser reutilizável)
+- Orquestrar repositórios e utilidades (mais lógica)
+- Ele NUNCA se envolve com o HTTP (seja o que vem diretamente na requisição ou para a resposta)
+- Ele vai receber e devolver dados estruturados ou lançar erros
+
+2 Tipos de validação:
+- Input validation
+    - Tudo o que vem ANTES do controller (antes de entrar no sistema)
+    - Pense que a informação recebida só vai entrar se ela bater TODOS os critérios para ser tratada
+    - História das formas
+    - Vive em um middleware
+- Domain/Business validation
+    - Tudo o que diz respeito a lógica do programa
+    - Mora dentro do service
 
 # Conceitos (core do que é pedido no projeto) 
 - Ciclo de vida de sessão com JWT

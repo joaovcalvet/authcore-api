@@ -47,3 +47,7 @@
 
 # 0.10.0
 - Criada a estrutura de services e repositories
+
+# 0.11.0
+- Criada a estrutura para gerenciamento de erros
+- Adicionado o middleware "errorHandler"

@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 
+import { EmailAlreadyExistsError } from '../errors/DomainError.ts';
+
 import type { User } from '../database/generated/prisma/client.ts';
 import type UserRepository from "../database/repositories/UserRepository.ts";
 
@@ -12,17 +14,13 @@ class UserService
         this.userRepo = userRepository;
     }
 
-    public async createUser(email: string, password: string): Promise<boolean>
+    public async createUser(email: string, password: string): Promise<void>
     {
-        try {
-            const hashedPassword = await bcrypt.hash(password, 10);
-            await this.userRepo.createUser(email, hashedPassword)
-        } catch(error) {
-            console.log(error);
-            return false;
-        }
+        if(await this.findUserByEmail(email) !== null)
+            throw new EmailAlreadyExistsError();
 
-        return true;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await this.userRepo.createUser(email, hashedPassword);
     }
 
     public async findUserByEmail(email: string): Promise<User | null>

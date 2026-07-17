@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
+
 import type UserService from './UserService.ts';
+import { DomainError } from '../errors/DomainError.ts';
 
 class AuthService
 {
@@ -10,17 +12,12 @@ class AuthService
         this.userSvc = userService;
     }
 
-    public async login(email: string, password: string): Promise<boolean>
+    public async login(email: string, password: string): Promise<void>
     {
         const user = await this.userSvc.findUserByEmail(email);
 
-        if(user === null)
-            return false;
-
-        if(!await bcrypt.compare(password, user.password))
-            return false;
-
-        return true;
+        if(user === null || !await bcrypt.compare(password, user.password))
+            throw new DomainError("Email ou senha incorretos!");
     }
 }
 

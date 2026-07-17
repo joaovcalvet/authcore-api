@@ -7,6 +7,7 @@ import { SQLiteDatabase } from './database/database.ts';
 import BaseController from './controllers/BaseController.ts';
 import BaseService from './services/BaseService.ts';
 import BaseRepository from './database/repositories/BaseRepository.ts';
+import errorHandler from './middlewares/ErrorHandler.ts';
 
 // Env e Express
 const port: string = process.env.APP_PORT || "3000";
@@ -24,6 +25,7 @@ const router: Router = new AppRouter(controller).initialize();
 
 // Rodando o Servidor
 app.use(router);
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Aplicação rodando na porta: ${port}`)
