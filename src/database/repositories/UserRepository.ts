@@ -21,6 +21,17 @@ class UserRepository
         );
     }
 
+    public async getUserById(id: number): Promise<User | null>
+    {
+        return await this.db.user.findFirst(
+            {
+                where: {
+                    id: id
+                }
+            }
+        );
+    }
+
     public async getUserByEmail(email: string): Promise<User | null>
     {
         return await this.db.user.findFirst(

@@ -1,4 +1,4 @@
-import { type NextFunction, type Request, type Response } from 'express';
+import type { Request, Response } from 'express';
 
 import type UserService from '../services/UserService.ts';
 import type AuthService from '../services/AuthService.ts';
@@ -17,7 +17,7 @@ class AuthController
         this.userSvc = userService;
     }
 
-    public async register(req: Request<{}, {}, RegisterInput>, res: Response, next: NextFunction): Promise<Response | void>
+    public async register(req: Request<{}, {}, RegisterInput>, res: Response): Promise<Response | void>
     {
         const input: RegisterInput = req.body;
 
@@ -25,7 +25,7 @@ class AuthController
         return res.json({ message: "Usuário cadastrado com sucesso!" });   
     }
 
-    public async login(req: Request<{}, {}, LoginInput>, res: Response, next: NextFunction): Promise<Response | void>
+    public async login(req: Request<{}, {}, LoginInput>, res: Response): Promise<Response | void>
     {
         const input: LoginInput = req.body;
 

@@ -23,6 +23,11 @@ class UserService
         await this.userRepo.createUser(email, hashedPassword);
     }
 
+    public async findUserById(id: number): Promise<User | null>
+    {
+        return await this.userRepo.getUserById(id);
+    }
+
     public async findUserByEmail(email: string): Promise<User | null>
     {
         return await this.userRepo.getUserByEmail(email);

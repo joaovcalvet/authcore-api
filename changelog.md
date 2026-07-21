@@ -60,3 +60,6 @@
 # 0.13.0
 - Implementado o pacote "jsonwebtoken"
 - Implementado o JWT 
+
+# 0.14.0
+- Rota "user/me" com segurança JWT 

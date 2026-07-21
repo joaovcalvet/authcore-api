@@ -18,8 +18,8 @@ class AuthRouter
         router.use(express.json());
 
         // Rotas /auth
-        router.post('/register', validationHandler(registerSchema), (req, res, next) => this.authController.register(req, res, next));
-        router.post('/login', validationHandler(loginSchema), (req, res, next) => this.authController.login(req, res, next));
+        router.post('/register', validationHandler(registerSchema), (req, res) => this.authController.register(req, res));
+        router.post('/login', validationHandler(loginSchema), (req, res) => this.authController.login(req, res));
 
         return router;
     }
