@@ -1,6 +1,7 @@
 import UserService from "./UserService.ts";
 import type BaseRepository from "../database/repositories/BaseRepository.ts";
 import AuthService from "./AuthService.ts";
+import JWTService from "./JWTService.js";
 
 class BaseService
 {
@@ -8,6 +9,7 @@ class BaseService
 
     public userService!: UserService;
     public authService!: AuthService;
+    public jwtService! : JWTService;
 
     constructor(repository: BaseRepository)
     {
@@ -17,8 +19,9 @@ class BaseService
 
     private initialize(): void
     {
+        this.jwtService = new JWTService();
         this.userService = new UserService(this.baseRepository.userRepository);
-        this.authService = new AuthService(this.userService);
+        this.authService = new AuthService(this.userService, this.jwtService);
     }
 }
 

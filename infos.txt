@@ -19,6 +19,12 @@ dependency injection (DI)
 error handling e conceito de negócio
 RFC 7807 (Problem Details for HTTP APIs)
 aplicação em debug, estados da aplicação
+response-body, httponly para JWT
+inicializador de variaveis de ambiente
+validações para as funções internas
+
+JWT não deve conter segredos!
+Ele contem apenas informações publicas!
 
 Responsabilidades do Controller:
 - Interagir com a camada HTTP

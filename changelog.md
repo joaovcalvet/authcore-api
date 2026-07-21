@@ -53,6 +53,10 @@
 - Adicionado o middleware "errorHandler"
 
 # 0.12.0
-- Implementada a biblioteca "zod"
+- Implementado o pacote "zod"
 - Criado o middleware para controlar as validações
 - Criada validações para as rotas existentes
+
+# 0.13.0
+- Implementado o pacote "jsonwebtoken"
+- Implementado o JWT 

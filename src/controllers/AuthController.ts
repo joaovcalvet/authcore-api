@@ -29,8 +29,8 @@ class AuthController
     {
         const input: LoginInput = req.body;
 
-        await this.authSvc.login(input.email, input.password);
-        return res.json({ message: "Usuário logado com sucesso!" });   
+        const accessToken = await this.authSvc.login(input.email, input.password);
+        return res.json({ message: "Usuário logado com sucesso!", data: { jwtAccessToken: accessToken } });   
     }
 }
 
