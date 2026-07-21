@@ -3,7 +3,8 @@ import { type NextFunction, type Request, type Response } from 'express';
 import type UserService from '../services/UserService.ts';
 import type AuthService from '../services/AuthService.ts';
 
-import type { IUserServiceAuth, ILoginRequestBody, IRegisterRequestBody } from '../interfaces/Auth.ts';
+import type { IUserServiceAuth } from '../interfaces/Auth.ts';
+import type { RegisterInput, LoginInput } from '../validation/auth.schema.ts';
 
 class AuthController
 {
@@ -16,37 +17,20 @@ class AuthController
         this.userSvc = userService;
     }
 
-    public async register(req: Request<{}, {}, IRegisterRequestBody>, res: Response, next: NextFunction): Promise<Response | void>
+    public async register(req: Request<{}, {}, RegisterInput>, res: Response, next: NextFunction): Promise<Response | void>
     {
-        // Validações
-        if(req.body.email === undefined || req.body.email === "")
-            return res.status(400).send("Email inválido!");
+        const input: RegisterInput = req.body;
 
-        if(req.body.password === undefined || req.body.password === "")
-            return res.status(400).send("Senha inválida!");
-
-        if(req.body.confirmPassword === undefined || req.body.confirmPassword === "")
-            return res.status(400).send("Confirmação de senha inválida!");
-
-        if(req.body.password != req.body.confirmPassword)
-            return res.status(400).send("As senhas não batem!");
-
-        // Lógica
-        await this.userSvc.createUser(req.body.email, req.body.password)
-        return res.send("Usuário cadastrado com sucesso!");   
+        await this.userSvc.createUser(input.email, input.password)
+        return res.json({ message: "Usuário cadastrado com sucesso!" });   
     }
 
-    public async login(req: Request<{}, {}, ILoginRequestBody>, res: Response, next: NextFunction): Promise<Response | void>
+    public async login(req: Request<{}, {}, LoginInput>, res: Response, next: NextFunction): Promise<Response | void>
     {
-        // Validação
-        const { email, password } = req.body;
+        const input: LoginInput = req.body;
 
-        if(!email || !password)
-            return res.status(400).send("Email e senha são obrigatórios!");
-
-        // Lógica
-        await this.authSvc.login(email, password);
-        return res.send("Usuário logado com sucesso!");   
+        await this.authSvc.login(input.email, input.password);
+        return res.json({ message: "Usuário logado com sucesso!" });   
     }
 }
 

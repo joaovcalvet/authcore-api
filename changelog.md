@@ -51,3 +51,8 @@
 # 0.11.0
 - Criada a estrutura para gerenciamento de erros
 - Adicionado o middleware "errorHandler"
+
+# 0.12.0
+- Implementada a biblioteca "zod"
+- Criado o middleware para controlar as validações
+- Criada validações para as rotas existentes
